@@ -64,3 +64,50 @@ Depois que o merge da sua pull request for feito, você pode deletar a sua branc
 Esse projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
+
+## Quickstart
+
+### Server
+
+Primeiro, crie um arquivo `.env` no seu diretorio raiz, use o `.env.example` como template de base.
+
+Depois, db run:
+
+```sh
+$ npm install
+$ npm run db:migrate
+```
+
+Finalmente, para mandar o start no seu server, rode:
+
+```sh
+$ npm run dev
+```
+
+### Web
+
+Para rodar web:
+
+```sh
+$ npm install
+$ npm run dev
+
+or
+$ yarn
+$ yarn dev
+
+```
+
+### Mobile
+
+Para rodar web:
+
+```sh
+$ npm install
+$npx react-native run-android
+
+or
+$ yarn
+$npx react-native run-android
+
+```
