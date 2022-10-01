@@ -23,13 +23,20 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+  const [discordDuoSelected, setDicordDuoSelected] = useState('ewqe');
   const navigation = useNavigation();
   const route = useRoute();
   const game = route.params as GameParams;
-  console.log(game);
+  // console.log(game);
 
   function handleGoBack() {
     navigation.goBack();
+  }
+
+  async function getDicordUser(adsId: string) {
+    fetch(`http://10.0.0.104:3333/ads/${adsId}/discord`)
+      .then(response => response.json())
+      .then(data => setDicordDuoSelected(data.discord));
   }
 
   useEffect(() => {
@@ -63,7 +70,7 @@ export function Game() {
             data={duos}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
-              <DuoCard data={item} onConnect={() => {}} />
+              <DuoCard data={item} onConnect={() => getDicordUser(item.id)} />
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -76,6 +83,11 @@ export function Game() {
                 Que Pena ainda não há anúncios para este Game :({' '}
               </Text>
             )}
+          />
+          <DuoMatch
+            visible={discordDuoSelected.length > 0}
+            discord={discordDuoSelected}
+            onClose={() => setDicordDuoSelected('')}
           />
         </SafeAreaView>
       </ScrollView>
