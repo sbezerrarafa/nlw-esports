@@ -83,11 +83,9 @@ app.get('/ads/:id/discord', async (request, response) => {
       id: adId,
     },
   });
-  return response.json([
-    {
-      discord: ad.discord,
-    },
-  ]);
+  return response.json({
+    discord: ad.discord,
+  });
 });
 
 app.listen(3333);
