@@ -1,10 +1,12 @@
-import './styles/main.css';
-import logoImg from './assets/logo-nlw-esports.svg';
-import { GamerBaner } from './components/GamerBanner';
-import { CreateAdBanner } from './components/CreateAdBanner';
-import * as Dialog from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import { CreateAdModal } from './components/CreateAdModal';
+import { CreateAdBanner } from './components/CreateAdBanner';
+import { GamerBaner } from './components/GamerBanner';
+import logoImg from './assets/logo-nlw-esports.svg';
+import './styles/main.css';
+import 'keen-slider/keen-slider.min.css';
+import { useKeenSlider } from 'keen-slider/react';
 
 export interface GameProps {
   id: string;
@@ -17,6 +19,14 @@ export interface GameProps {
 
 function App() {
   const [games, setGames] = useState<GameProps[]>([]);
+  const [sliderRef, instanceRef] = useKeenSlider(
+    {
+      slides: {
+        perView: 6,
+      },
+    },
+    [],
+  );
 
   useEffect(() => {
     fetch('http://localhost:3333/games')
@@ -48,7 +58,8 @@ function App() {
       </h1>
       {/* <button onClick={handleButtonClick}>Clique aqui</button>
       {hasUserClickedOnButton ? 'usuario clicou' : ''} */}
-      <div className="grid grid-cols-6 gap-6 mt-16">
+
+      <div ref={sliderRef} className="grid grid-cols-6 gap-6 mt-16 keen-slider">
         {games.map((game) => {
           return (
             <GamerBaner
